@@ -8,6 +8,18 @@
 $ yarn install
 ```
 
+# Cambiar las variables de entorno
+
+```
+docker-compose up -d
+```
+
+# Ejecutar SEED
+
+```
+http://localhost:8080/api/seed
+```
+
 ## Running the app
 
 ```bash
@@ -20,4 +32,5 @@ $ yarn run start:dev
 # production mode
 $ yarn run start:prod
 ```
+
 
