@@ -144,7 +144,7 @@ export class ProductsService {
     }
   }
 
-  private handleDBExceptions(err: any) {
+  private handleDBExceptions(err: any): never {
     if (err.code === '23505') throw new BadRequestException(err.detail);
 
     this.logger.error(err);
