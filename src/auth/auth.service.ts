@@ -35,6 +35,7 @@ export class AuthService {
       });
 
       await this.userRepository.save(user);
+      delete user.password;
 
       return {
         ...user,
@@ -58,6 +59,13 @@ export class AuthService {
     if (!this.bcryptAdapter.compareHash(password, user.password))
       throw new UnauthorizedException('Credentials are not valid password');
 
+    return {
+      ...user,
+      token: this.getJwtToken({ uuid: user.id }),
+    };
+  }
+
+  async checkAuthStatus(user: User) {
     return {
       ...user,
       token: this.getJwtToken({ uuid: user.id }),

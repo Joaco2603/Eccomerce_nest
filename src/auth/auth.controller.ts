@@ -22,6 +22,12 @@ export class AuthController {
     return this.authService.loginUser(loginUserDto);
   }
 
+  @Get('renovated')
+  @UseGuards(AuthGuard())
+  checkAuthStatus(@GetUser() user: User) {
+    return this.authService.checkAuthStatus(user);
+  }
+
   //@Req() request: Express.Request
   @Get('private')
   @UseGuards(AuthGuard())
