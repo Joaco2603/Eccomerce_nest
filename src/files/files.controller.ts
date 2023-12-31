@@ -14,6 +14,8 @@ import {
 import { FilesService } from './files.service';
 import { diskStorage } from 'multer';
 import { fileNamer, fileFilter } from 'src/common/helpers/';
+import { ValidRoles } from 'src/auth/interface';
+import { Auth } from 'src/auth/decorators';
 
 @Controller('files')
 export class FilesController {
@@ -31,6 +33,7 @@ export class FilesController {
     res.sendFile(path);
   }
 
+  @Auth(ValidRoles.admin, ValidRoles.superUser)
   @Post('product')
   @UseInterceptors(
     FileInterceptor('file', {

@@ -4,6 +4,9 @@ import { CreateUserDto, LoginUserDto } from './dto';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from './decorators/get-user.decorators';
 import { User } from './entities/user.entity';
+import { RawHeaders } from './decorators/rawHeaders.decorator';
+import { Auth } from './decorators';
+import { ValidRoles } from './interface';
 
 @Controller('auth')
 export class AuthController {
@@ -22,7 +25,18 @@ export class AuthController {
   //@Req() request: Express.Request
   @Get('private')
   @UseGuards(AuthGuard())
-  testingPrivateRoute(@GetUser() user: User) {
-    return user;
+  testingPrivateRoute(@GetUser() user: User, @RawHeaders() header: any) {
+    return { user: user, header };
+  }
+
+  // @SetMetadata('roles', ['admin', 'super-admin'])
+
+  @Get('private2')
+  @Auth(ValidRoles.admin)
+  privateRoute2(@GetUser() user: User) {
+    return {
+      ok: true,
+      user,
+    };
   }
 }
