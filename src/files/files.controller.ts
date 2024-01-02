@@ -11,12 +11,14 @@ import {
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { FilesService } from './files.service';
 import { diskStorage } from 'multer';
 import { fileNamer, fileFilter } from 'src/common/helpers/';
 import { ValidRoles } from 'src/auth/interface';
 import { Auth } from 'src/auth/decorators';
 
+@ApiTags('Files')
 @Controller('files')
 export class FilesController {
   constructor(

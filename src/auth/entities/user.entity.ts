@@ -35,7 +35,6 @@ export class User {
   //   eager: true,
   // })
   // roles?: string[];
-
   @Column('text', {
     array: true,
     default: ['USER'],
